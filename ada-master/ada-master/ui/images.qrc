@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="imgs">
+    <file>images/biofav.png</file>
+    <file>images/biologo.png</file>
+    <file>images/breastfeeding_100px.png</file>
+    <file>images/caduceus_100px.png</file>
+  </qresource>
+</RCC>

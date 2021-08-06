@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>996</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>User Profile</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+	background-color: #fff;
+	color: red;
+
+}
+
+
+/*-----QLabel-----*/
+QLabel
+{
+	background-color: transparent;
+	color: #454544;
+	font-weight: 500;
+	font-size: 16px;
+	font-family: poppins;
+
+}
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+	background-color: #5c55e9;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 15px;
+	padding: 10px;
+
+}
+
+
+QPushButton::disabled
+{
+	background-color: #5c5c5c;
+
+}
+
+
+QPushButton::hover
+{
+	background-color: #5564f2;
+
+}
+
+
+QPushButton::pressed
+{
+	background-color: #3d4ef2;
+
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox
+{
+	background-color: transparent;
+	color: #5c55e9;
+	font-size: 10px;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox::indicator
+{
+    background-color: #323232;
+    border: 1px solid darkgray;
+    width: 12px;
+    height: 12px;
+
+}
+
+
+QCheckBox::indicator:checked
+{
+    image:url(&quot;./ressources/check.png&quot;);
+	background-color: #5c55e9;
+    border: 1px solid #5c55e9;
+
+}
+
+
+QCheckBox::indicator:unchecked:hover
+{
+    border: 1px solid #5c55e9;
+
+}
+
+
+QCheckBox::disabled
+{
+	color: #656565;
+
+}
+
+
+QCheckBox::indicator:disabled
+{
+	background-color: #656565;
+	color: #656565;
+    border: 1px solid #656565;
+
+}
+
+
+/*-----QLineEdit-----*/
+QLineEdit
+{
+	background-color: #c2c7d5;
+	color: #2a547f;
+	border: none;
+	padding: 5px;
+
+}
+
+
+/*-----QListView-----*/
+QListView
+{
+	background-color: #5c55e9;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	show-decoration-selected: 0;
+	border-radius: 4px;
+	padding-left: -15px;
+	padding-right: -15px;
+	padding-top: 5px;
+
+} 
+
+
+QListView:disabled 
+{
+	background-color: #5c5c5c;
+
+}
+
+
+QListView::item
+{
+	background-color: #454e5e;
+	border: none;
+	padding: 10px;
+	border-radius: 0px;
+	padding-left : 10px;
+	height: 32px;
+
+}
+
+
+QListView::item:selected
+{
+	color: #000;
+	background-color: #fff;
+
+}
+
+
+QListView::item:!selected
+{
+	color:white;
+	background-color: transparent;
+	border: none;
+	padding-left : 10px;
+
+}
+
+
+QListView::item:!selected:hover
+{
+	color: #fff;
+	background-color: #5564f2;
+	border: none;
+	padding-left : 10px;
+
+}
+
+
+/*-----QTreeView-----*/
+QTreeView 
+{
+	background-color: #fff;
+	show-decoration-selected: 0;
+	color: #454544;
+
+}
+
+
+QTreeView:disabled
+{
+	background-color: #242526;
+	show-decoration-selected: 0;
+
+}
+
+
+QTreeView::item 
+{
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+
+}
+
+
+QTreeView::item:hover 
+{
+	background-color: #bcbdbb;
+	color: #000;
+
+}
+
+
+QTreeView::item:selected 
+{
+	background-color: #5c55e9;
+	color: #fff;
+
+}
+
+
+QTreeView::item:selected:active
+{
+	background-color: #5c55e9;
+	color: #fff;
+
+}
+
+
+QTreeView::item:selected:disabled
+{
+	background-color: #525251;
+	color: #656565;
+
+}
+
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings 
+{
+	image: url(://tree-closed.png);
+
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  
+{
+	image: url(://tree-open.png);
+
+}
+
+
+/*-----QTableView &amp; QTableWidget-----*/
+QTableView
+{
+    background-color: #fff;
+	border: 1px solid gray;
+    color: #454544;
+    gridline-color: gray;
+    outline : 0;
+
+}
+
+
+QTableView::disabled
+{
+    background-color: #242526;
+    border: 1px solid #32414B;
+    color: #656565;
+    gridline-color: #656565;
+    outline : 0;
+
+}
+
+
+QTableView::item:hover 
+{
+    background-color: #bcbdbb;
+    color: #000;
+
+}
+
+
+QTableView::item:selected 
+{
+	background-color: #5c55e9;
+    color: #fff;
+
+}
+
+
+QTableView::item:selected:disabled
+{
+    background-color: #1a1b1c;
+    border: 2px solid #525251;
+    color: #656565;
+
+}
+
+
+QTableCornerButton::section
+{
+	background-color: #ced5e3;
+	border: none;
+    color: #fff;
+
+}
+
+
+QHeaderView::section
+{
+	color: #2a547f;
+	border: 0px;
+	background-color: #ced5e3;
+	padding: 5px;
+
+}
+
+
+QHeaderView::section:disabled
+{
+    background-color: #525251;
+    color: #656565;
+
+}
+
+
+QHeaderView::section:checked
+{
+    color: #fff;
+    background-color: #5c55e9;
+
+}
+
+
+QHeaderView::section:checked:disabled
+{
+    color: #656565;
+    background-color: #525251;
+
+}
+
+
+QHeaderView::section::vertical::first,
+QHeaderView::section::vertical::only-one
+{
+    border-top: 1px solid #353635;
+
+}
+
+
+QHeaderView::section::vertical
+{
+    border-top: 1px solid #353635;
+
+}
+
+
+QHeaderView::section::horizontal::first,
+QHeaderView::section::horizontal::only-one
+{
+    border-left: 1px solid #353635;
+
+}
+
+
+QHeaderView::section::horizontal
+{
+    border-left: 1px solid #353635;
+
+}
+
+
+/*-----QScrollBar-----*/
+QScrollBar:horizontal 
+{
+    background-color: transparent;
+    height: 8px;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+
+QScrollBar::handle:horizontal 
+{
+    border: none;
+	min-width: 100px;
+    background-color: #7e92b7;
+
+}
+
+
+QScrollBar::add-line:horizontal, 
+QScrollBar::sub-line:horizontal,
+QScrollBar::add-page:horizontal, 
+QScrollBar::sub-page:horizontal 
+{
+    width: 0px;
+    background-color: #d8dce6;
+
+}
+
+
+QScrollBar:vertical 
+{
+    background-color: transparent;
+    width: 8px;
+    margin: 0;
+
+}
+
+
+QScrollBar::handle:vertical 
+{
+    border: none;
+	min-height: 100px;
+    background-color: #7e92b7;
+
+}
+
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical,
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical 
+{
+    height: 0px;
+    background-color: #d8dce6;
+
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QFrame" name="profileFrame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="1">
+          <widget class="QLabel" name="lblName">
+           <property name="text">
+            <string>Jeremy Rose</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="5" column="2">
+          <widget class="QLabel" name="lblRegDate">
+           <property name="font">
+            <font>
+             <family>poppins</family>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-weight: normal;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <widget class="QLabel" name="lblReg">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="imgProfile">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>../images/user-login.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="lblPhone">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="lblUser">
+           <property name="text">
+            <string>Username</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLabel" name="lblRegDate_2">
+           <property name="font">
+            <font>
+             <family>poppins</family>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-weight: normal;</string>
+           </property>
+           <property name="text">
+            <string>User Since: </string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Email Address</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Phone</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QLabel" name="label_6">
+           <property name="font">
+            <font>
+             <family>poppins</family>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-weight: normal;</string>
+           </property>
+           <property name="text">
+            <string>Reg Number: </string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLabel" name="lblEmail">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QLabel" name="label_12">
+           <property name="font">
+            <font>
+             <family>poppins</family>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-weight: normal;</string>
+           </property>
+           <property name="text">
+            <string>Faculty:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="2">
+          <widget class="QLabel" name="lblFalc">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="2">
+          <widget class="QLabel" name="lblDept">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QLabel" name="label_8">
+           <property name="font">
+            <font>
+             <family>poppins</family>
+             <pointsize>-1</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-weight: normal;</string>
+           </property>
+           <property name="text">
+            <string>Department:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1" colspan="2">
+          <widget class="QPushButton" name="btnEdit">
+           <property name="text">
+            <string>Edit Profile</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>996</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuProfile">
+    <property name="title">
+     <string>Profile</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuPassword">
+    <property name="title">
+     <string>Password</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuResults">
+    <property name="title">
+     <string>Results</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuQuit">
+    <property name="title">
+     <string>Quit</string>
+    </property>
+    <addaction name="actionClose"/>
+   </widget>
+   <addaction name="menuProfile"/>
+   <addaction name="menuPassword"/>
+   <addaction name="menuResults"/>
+   <addaction name="menuQuit"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

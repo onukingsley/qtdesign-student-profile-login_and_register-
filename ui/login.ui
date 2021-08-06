@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>554</width>
+    <height>582</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+	background-color: #fff;
+	color: red;
+
+}
+
+
+/*-----QLabel-----*/
+QLabel
+{
+	background-color: transparent;
+	color: #454544;
+	font-weight: bold;
+	font-size: 13px;
+
+}
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+	background-color: #5c55e9;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 15px;
+	padding: 10px;
+
+}
+
+
+QPushButton::disabled
+{
+	background-color: #5c5c5c;
+
+}
+
+
+QPushButton::hover
+{
+	background-color: #5564f2;
+
+}
+
+
+QPushButton::pressed
+{
+	background-color: #3d4ef2;
+
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox
+{
+	background-color: transparent;
+	color: #5c55e9;
+	font-size: 10px;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox::indicator
+{
+    background-color: #323232;
+    border: 1px solid darkgray;
+    width: 12px;
+    height: 12px;
+
+}
+
+
+QCheckBox::indicator:checked
+{
+    image:url(&quot;./ressources/check.png&quot;);
+	background-color: #5c55e9;
+    border: 1px solid #5c55e9;
+
+}
+
+
+QCheckBox::indicator:unchecked:hover
+{
+    border: 1px solid #5c55e9;
+
+}
+
+
+QCheckBox::disabled
+{
+	color: #656565;
+
+}
+
+
+QCheckBox::indicator:disabled
+{
+	background-color: #656565;
+	color: #656565;
+    border: 1px solid #656565;
+
+}
+
+
+/*-----QLineEdit-----*/
+QLineEdit
+{
+	background-color: #c2c7d5;
+	color: #2a547f;
+	border: none;
+	padding: 5px;
+
+}
+
+
+/*-----QListView-----*/
+QListView
+{
+	background-color: #5c55e9;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	show-decoration-selected: 0;
+	border-radius: 4px;
+	padding-left: -15px;
+	padding-right: -15px;
+	padding-top: 5px;
+
+} 
+
+
+QListView:disabled 
+{
+	background-color: #5c5c5c;
+
+}
+
+
+QListView::item
+{
+	background-color: #454e5e;
+	border: none;
+	padding: 10px;
+	border-radius: 0px;
+	padding-left : 10px;
+	height: 32px;
+
+}
+
+
+QListView::item:selected
+{
+	color: #000;
+	background-color: #fff;
+
+}
+
+
+QListView::item:!selected
+{
+	color:white;
+	background-color: transparent;
+	border: none;
+	padding-left : 10px;
+
+}
+
+
+QListView::item:!selected:hover
+{
+	color: #fff;
+	background-color: #5564f2;
+	border: none;
+	padding-left : 10px;
+
+}
+
+
+/*-----QTreeView-----*/
+QTreeView 
+{
+	background-color: #fff;
+	show-decoration-selected: 0;
+	color: #454544;
+
+}
+
+
+QTreeView:disabled
+{
+	background-color: #242526;
+	show-decoration-selected: 0;
+
+}
+
+
+QTreeView::item 
+{
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+
+}
+
+
+QTreeView::item:hover 
+{
+	background-color: #bcbdbb;
+	color: #000;
+
+}
+
+
+QTreeView::item:selected 
+{
+	background-color: #5c55e9;
+	color: #fff;
+
+}
+
+
+QTreeView::item:selected:active
+{
+	background-color: #5c55e9;
+	color: #fff;
+
+}
+
+
+QTreeView::item:selected:disabled
+{
+	background-color: #525251;
+	color: #656565;
+
+}
+
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings 
+{
+	image: url(://tree-closed.png);
+
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  
+{
+	image: url(://tree-open.png);
+
+}
+
+
+/*-----QTableView &amp; QTableWidget-----*/
+QTableView
+{
+    background-color: #fff;
+	border: 1px solid gray;
+    color: #454544;
+    gridline-color: gray;
+    outline : 0;
+
+}
+
+
+QTableView::disabled
+{
+    background-color: #242526;
+    border: 1px solid #32414B;
+    color: #656565;
+    gridline-color: #656565;
+    outline : 0;
+
+}
+
+
+QTableView::item:hover 
+{
+    background-color: #bcbdbb;
+    color: #000;
+
+}
+
+
+QTableView::item:selected 
+{
+	background-color: #5c55e9;
+    color: #fff;
+
+}
+
+
+QTableView::item:selected:disabled
+{
+    background-color: #1a1b1c;
+    border: 2px solid #525251;
+    color: #656565;
+
+}
+
+
+QTableCornerButton::section
+{
+	background-color: #ced5e3;
+	border: none;
+    color: #fff;
+
+}
+
+
+QHeaderView::section
+{
+	color: #2a547f;
+	border: 0px;
+	background-color: #ced5e3;
+	padding: 5px;
+
+}
+
+
+QHeaderView::section:disabled
+{
+    background-color: #525251;
+    color: #656565;
+
+}
+
+
+QHeaderView::section:checked
+{
+    color: #fff;
+    background-color: #5c55e9;
+
+}
+
+
+QHeaderView::section:checked:disabled
+{
+    color: #656565;
+    background-color: #525251;
+
+}
+
+
+QHeaderView::section::vertical::first,
+QHeaderView::section::vertical::only-one
+{
+    border-top: 1px solid #353635;
+
+}
+
+
+QHeaderView::section::vertical
+{
+    border-top: 1px solid #353635;
+
+}
+
+
+QHeaderView::section::horizontal::first,
+QHeaderView::section::horizontal::only-one
+{
+    border-left: 1px solid #353635;
+
+}
+
+
+QHeaderView::section::horizontal
+{
+    border-left: 1px solid #353635;
+
+}
+
+
+/*-----QScrollBar-----*/
+QScrollBar:horizontal 
+{
+    background-color: transparent;
+    height: 8px;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+
+QScrollBar::handle:horizontal 
+{
+    border: none;
+	min-width: 100px;
+    background-color: #7e92b7;
+
+}
+
+
+QScrollBar::add-line:horizontal, 
+QScrollBar::sub-line:horizontal,
+QScrollBar::add-page:horizontal, 
+QScrollBar::sub-page:horizontal 
+{
+    width: 0px;
+    background-color: #d8dce6;
+
+}
+
+
+QScrollBar:vertical 
+{
+    background-color: transparent;
+    width: 8px;
+    margin: 0;
+
+}
+
+
+QScrollBar::handle:vertical 
+{
+    border: none;
+	min-height: 100px;
+    background-color: #7e92b7;
+
+}`
+
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical,
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical 
+{
+    height: 0px;
+    background-color: #d8dce6;
+
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::West</enum>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Register</string>
+      </attribute>
+      <widget class="QWidget" name="formLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>19</x>
+         <y>9</y>
+         <width>481</width>
+         <height>541</height>
+        </rect>
+       </property>
+       <layout class="QFormLayout" name="formLayout">
+        <property name="horizontalSpacing">
+         <number>10</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>15</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
+        <item row="0" column="1">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Full name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="txtusername">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:15px;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLineEdit" name="txtpassword">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Normal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showpassword">
+            <property name="minimumSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>40</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border-radius:none;
+background:gray;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../../Documents/web with uncle mark/light_on.png</normaloff>../../../Documents/web with uncle mark/light_on.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;confirm &lt;br&gt; password&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLineEdit" name="txtconfirmpasswod">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:15px;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>EMail Address</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLineEdit" name="txtemail">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:15px;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>User Type</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QComboBox" name="cmbusertype">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">padding:10px;
+font-size:14px;
+color:blue;
+font-weight:bold;</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Admin</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>User</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <widget class="QPushButton" name="regbtn">
+          <property name="text">
+           <string>Register</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0" colspan="2">
+         <widget class="QLabel" name="msgbox">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="txtfullname">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:15px;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>User name</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Login</string>
+      </attribute>
+      <widget class="QWidget" name="formLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>491</width>
+         <height>511</height>
+        </rect>
+       </property>
+       <layout class="QFormLayout" name="formLayout_3">
+        <property name="horizontalSpacing">
+         <number>20</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>20</number>
+        </property>
+        <property name="leftMargin">
+         <number>20</number>
+        </property>
+        <property name="topMargin">
+         <number>20</number>
+        </property>
+        <property name="rightMargin">
+         <number>20</number>
+        </property>
+        <property name="bottomMargin">
+         <number>20</number>
+        </property>
+        <item row="0" column="1">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>100</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Username</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="loginusername">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:15px</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="loginpassword">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">Border-radius:15px;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <widget class="QPushButton" name="loginbtn">
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QLineEdit" name="msg1">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">Border-radius:15px;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
