@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication,QDialog,QLineEdit,QPushButton,QStyleFac
 from PyQt5.uic import loadUi
 import sqlite3
 from datetime import datetime
+from PyQt5 import *
 from ui.function import *
 
 Db = sqlite3.connect('database.sql', check_same_thread=False)
@@ -11,6 +12,14 @@ class edit(QWidget):
     def __init__(self):
         super(edit ,self).__init__()
         loadUi('editstudent.ui', self)
+        self.username= 'tess'
+        self.showdetails()
+
+    def showdetails(self):
+        sql = f"""select * from users where username = '{self.username}'"""
+        result = cursor.execute(sql).fetchall()[0]
+        print(result)
+
 
 
 
@@ -74,6 +83,7 @@ class login(QDialog):
             self.txtpassword.setEchoMode(2)
         else:
             self.txtpassword.setEchoMode(0)
+
 
     def register(self):
         print('hello')
