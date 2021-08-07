@@ -14,16 +14,40 @@ class edit(QWidget):
         loadUi('editstudent.ui', self)
         self.username= 'tess'
         self.showdetails()
+        self.buttonhandler()
+
+
+    def buttonhandler(self):
+        self.regbtn.clicked.connect(self.updateuser)
 
     def showdetails(self):
         sql = f"""select * from users where username = '{self.username}'"""
         result = cursor.execute(sql).fetchall()[0]
-        print(result)
+        self.txtfullname.setText(result[1])
+        self.txtusername.setText(result[2])
+        self.txtfaculty.setText(result[7])
+        self.txtdepartment.setText(result[8])
+        self.txtemail.setText(result[4])
 
+    def updateuser(self):
+        fullname = self.txtfullname.text()
+        username = self.txtusername.text()
+        faculty = self.txtfaculty.text()
+        department = self.txtdepartment.text()
+        email = self.txtemail.text()
 
+        array = [fullname, faculty, department]
 
-
-
+        try:
+            if checkempty(array):
+                msg = 'please fill all available fields!'
+            else:
+                sql = f"""Update users set fullname = '{fullname}',faculty = '{faculty}',department = '{department}' where username = 'tess'"""
+                cursor.execute(sql)
+                Db.commit()
+                print('successful')
+        except Exception as err:
+            print(err)
 
 
 class user(QMainWindow):
