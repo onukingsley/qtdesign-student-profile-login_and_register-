@@ -46,6 +46,7 @@ class edit(QWidget):
                 cursor.execute(sql)
                 Db.commit()
                 print('successful')
+                cleartext([self.txtfullname, self.txtfaculty, self.txtdepartment])
         except Exception as err:
             print(err)
 
@@ -133,6 +134,7 @@ class login(QDialog):
                 sql = f""" INSERT INTO users (fullname, username, password, email, usertype, regDate) values ('{fullname}','{username}',"{password}",'{email}','{usertype}','{now}')"""
                 self.cursor.execute(sql)
                 self.Db.commit()
+
 
 
         except Exception as err:

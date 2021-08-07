@@ -9,3 +9,7 @@ def checkempty(arrays):
             msg = True
 
     return msg
+
+def cleartext(arrays):
+    for items in arrays:
+        items.setText("")
