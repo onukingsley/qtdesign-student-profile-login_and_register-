@@ -1,24 +1,41 @@
 import sys
-from PyQt5.QtWidgets import QApplication,QDialog,QLineEdit,QPushButton,QStyleFactory,QMainWindow,QWidget
+from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QPushButton, QStyleFactory, QMainWindow, QWidget
 from PyQt5.uic import loadUi
 import sqlite3
 from datetime import datetime
 from PyQt5 import *
+from PyQt5.QtCore import QTimer
 from ui.function import *
 
 Db = sqlite3.connect('database.sql', check_same_thread=False)
 cursor = Db.cursor()
+
+
 class edit(QWidget):
     def __init__(self):
-        super(edit ,self).__init__()
+        super(edit, self).__init__()
         loadUi('editstudent.ui', self)
-        self.username= 'tess'
+        self.username = 'tess'
+        self.value = 0
         self.showdetails()
         self.buttonhandler()
-
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.progress)
 
     def buttonhandler(self):
         self.regbtn.clicked.connect(self.updateuser)
+
+    def progress(self):
+        self.value = self.value + 5
+        if self.value <= 100:
+            self.progressBar.setValue(self.value)
+            self.lblmsg.setText('updating....')
+        else:
+            self.timer.stop()
+            self.lblmsg.setText('')
+            self.progressBar.setValue(0)
+            self.value = 0
+            self.close()
 
     def showdetails(self):
         sql = f"""select * from users where username = '{self.username}'"""
@@ -46,6 +63,7 @@ class edit(QWidget):
                 cursor.execute(sql)
                 Db.commit()
                 print('successful')
+                self.timer.start(50)
                 cleartext([self.txtfullname, self.txtfaculty, self.txtdepartment])
         except Exception as err:
             print(err)
@@ -54,9 +72,10 @@ class edit(QWidget):
 class user(QMainWindow):
     Db = sqlite3.connect('database.sql', check_same_thread=False)
     cursor = Db.cursor()
+
     def __init__(self):
         super(user, self).__init__()
-        loadUi('untitled.ui',self)
+        loadUi('untitled.ui', self)
         self.btnhandle()
         self.loaddetails()
         self.w = edit()
@@ -64,10 +83,8 @@ class user(QMainWindow):
     def btnhandle(self):
         self.editbtn.clicked.connect(self.showedit)
 
-
     def showedit(self):
         self.w.show()
-
 
     def loaddetails(self):
         sql = f"""select * from users where username = 'tess'"""
@@ -80,7 +97,6 @@ class user(QMainWindow):
         self.txtphoneno.setText(result[5])
         self.txtfaculty.setText(result[1])
         self.txtdepartment.setText(result[1])
-
 
 
 class login(QDialog):
@@ -97,18 +113,16 @@ class login(QDialog):
         self.buttonhandle()
         self.w = user()
 
-
     def buttonhandle(self):
         self.showpassword.clicked.connect(self.showpass)
         self.regbtn.clicked.connect(self.register)
         self.loginbtn.clicked.connect(self.log)
 
     def showpass(self):
-        if self.txtpassword.echoMode()== 0:
+        if self.txtpassword.echoMode() == 0:
             self.txtpassword.setEchoMode(2)
         else:
             self.txtpassword.setEchoMode(0)
-
 
     def register(self):
         print('hello')
@@ -124,7 +138,7 @@ class login(QDialog):
 
             if not fullname or not username or not password or not confirm or not email:
                 msg = "You need to fill all the fields"
-            elif len(password)<5:
+            elif len(password) < 5:
                 msg = 'Password too short'
             elif password != confirm:
                 msg = 'Password Mismatch'
@@ -141,8 +155,6 @@ class login(QDialog):
             msg = str(err)
 
         self.msgbox.setText(msg)
-
-
 
     def log(self):
         username = self.loginusername.text()
@@ -166,7 +178,7 @@ class login(QDialog):
             else:
                 msg = 'your password is incorrect'
         except Exception as err:
-           msg =  str(err)
+            msg = str(err)
 
         self.msg1.setText(msg)
         return username
