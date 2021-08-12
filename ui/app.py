@@ -15,7 +15,6 @@ class edit(QWidget):
     def __init__(self):
         super(edit, self).__init__()
         loadUi('editstudent.ui', self)
-        self.username = 'tess'
         self.value = 0
         self.showdetails()
         self.buttonhandler()
@@ -59,7 +58,7 @@ class edit(QWidget):
             if checkempty(array):
                 msg = 'please fill all available fields!'
             else:
-                sql = f"""Update users set fullname = '{fullname}',faculty = '{faculty}',department = '{department}' where username = 'tess'"""
+                sql = f"""Update users set fullname = '{fullname}',faculty = '{faculty}',department = '{department}' where username = '{self.username}'"""
                 cursor.execute(sql)
                 Db.commit()
                 print('successful')
@@ -78,16 +77,18 @@ class user(QMainWindow):
         loadUi('untitled.ui', self)
         self.btnhandle()
         self.loaddetails()
-        self.w = edit()
+        self.w = ''
 
     def btnhandle(self):
         self.editbtn.clicked.connect(self.showedit)
 
     def showedit(self):
+        edit.username = self.username
+        self.w = edit()
         self.w.show()
 
     def loaddetails(self):
-        sql = f"""select * from users where username = 'tess'"""
+        sql = f"""select * from users where username = '{self.username}'"""
         result = self.cursor.execute(sql).fetchall()[0]
 
         print(result[1])
@@ -111,7 +112,7 @@ class login(QDialog):
         self.showpass()
         self.show()
         self.buttonhandle()
-        self.w = user()
+        self.w = ''
 
     def buttonhandle(self):
         self.showpassword.clicked.connect(self.showpass)
@@ -145,7 +146,7 @@ class login(QDialog):
             else:
                 # password = ci.encrypt(password)
                 password = sa.encrypt(password)
-                sql = f""" INSERT INTO users (fullname, username, password, email, usertype, regDate) values ('{fullname}','{username}',"{password}",'{email}','{usertype}','{now}')"""
+                sql = f""" INSERT INTO users (fullname, username, password, email, usertype, regDate) values ('{fullname}','{username}','{password}','{email}','{usertype}','{now}')"""
                 self.cursor.execute(sql)
                 self.Db.commit()
 
@@ -154,7 +155,6 @@ class login(QDialog):
         except Exception as err:
             msg = str(err)
 
-        self.msgbox.setText(msg)
 
     def log(self):
         username = self.loginusername.text()
@@ -171,7 +171,9 @@ class login(QDialog):
                 msg = 'incorrect password'
             # elif ci.verify(password, result[0]):
             elif sa.verify(password, result[0]):
+                user.username= username
                 msg = 'your logged in'
+                self.w = user()
                 self.w.show()
                 self.hide()
 
