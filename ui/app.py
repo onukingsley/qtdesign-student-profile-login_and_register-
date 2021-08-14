@@ -11,6 +11,40 @@ Db = sqlite3.connect('database.sql', check_same_thread=False)
 cursor = Db.cursor()
 
 
+class changepassword(QWidget):
+    def __init__(self):
+        super(changepassword, self).__init__()
+        loadUi('changepassword.ui',self)
+        self.buttonhandle()
+
+
+    def buttonhandle(self):
+        self.btnchangepassword.clicked.connect(self.confirmpassword)
+
+
+    def confirmpassword(self):
+       try:
+           print('yes')
+           password = self.txtcurrentpassword.text()
+           newpassword = self.txtnewpassword.text()
+           confirmpass = self.txtconfirmpass.text()
+
+           sql = f"""SELECT password from users where username = '{self.username}'"""
+           result = cursor.execute(sql).fetchall()[0]
+           verify = sa.verify(password, result[0])
+
+           if not password or not newpassword or not confirmpass:
+               print('please fill up all spaces')
+
+           elif verify:
+               newpass = sa.encrypt(newpassword)
+               sql = f"""UPDATE users set password = '{newpass}'"""
+               cursor.execute(sql)
+               Db.commit()
+           else:
+               print('wrong password')
+       except Exception as err:
+           print(err)
 class edit(QWidget):
     def __init__(self):
         super(edit, self).__init__()
@@ -78,12 +112,24 @@ class user(QMainWindow):
         self.btnhandle()
         self.loaddetails()
         self.w = ''
+        self.b = ''
 
     def btnhandle(self):
         self.editbtn.clicked.connect(self.showedit)
+        try:
+            self.btnchange.clicked.connect(self.showchangepassword)
+        except Exception as err:
+            print(err)
+
+    def showchangepassword(self):
+        changepassword.username = self.username
+        self.b = changepassword()
+        self.b.show()
+
 
     def showedit(self):
         edit.username = self.username
+        changepassword.username = self.username
         self.w = edit()
         self.w.show()
 

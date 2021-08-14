@@ -222,6 +222,13 @@
         </property>
        </widget>
       </item>
+      <item row="8" column="0">
+       <widget class="QPushButton" name="btnchange">
+        <property name="text">
+         <string>change password</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </widget>
@@ -244,6 +251,7 @@
     <property name="title">
      <string>Password</string>
     </property>
+    <addaction name="changepassword"/>
    </widget>
    <widget class="QMenu" name="menuResults">
     <property name="title">
@@ -261,6 +269,11 @@
    <addaction name="menuQuuit"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="changepassword">
+   <property name="text">
+    <string>changepassword</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
