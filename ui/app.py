@@ -1,11 +1,12 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QPushButton, QStyleFactory, QMainWindow, QWidget
+from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QPushButton, QStyleFactory, QMainWindow, QWidget, QMessageBox
 from PyQt5.uic import loadUi
 import sqlite3
 from datetime import datetime
 from PyQt5 import *
 from PyQt5.QtCore import QTimer
 from ui.function import *
+from requests import request, ConnectionError
 
 Db = sqlite3.connect('database.sql', check_same_thread=False)
 cursor = Db.cursor()
@@ -35,6 +36,9 @@ class changepassword(QWidget):
 
            if not password or not newpassword or not confirmpass:
                print('please fill up all spaces')
+
+           elif password == newpassword:
+               print('please make sure the password match the verified password')
 
            elif verify:
                newpass = sa.encrypt(newpassword)
@@ -164,6 +168,30 @@ class login(QDialog):
         self.showpassword.clicked.connect(self.showpass)
         self.regbtn.clicked.connect(self.register)
         self.loginbtn.clicked.connect(self.log)
+        self.btnforget.clicked.connect(self.forgottenpassword)
+
+
+    def forgottenpassword(self):
+        value = myMsgBox('Are you sure you want to change your password ', 'recover your password',QMessageBox.Information, QMessageBox.Ok | QMessageBox.Cancel)
+
+        if value == QMessageBox.Ok:
+            try:
+                request('GET', 'https://google.com')
+                username = self.txtusername.text()
+                if not username:
+                   print("username is needed")
+                else:
+                    sql = f"""select email from users where username = '{username}'"""
+                    result = cursor.execute(sql).fetchone()[0]
+                    if not result:
+                        msg = "user not found"
+                    else:
+                       myMsgBox('your recover message would be sent to your email')
+            except Exception as err:
+                print(err)
+                myMsgBox('Get an internet connection')
+
+
 
     def showpass(self):
         if self.txtpassword.echoMode() == 0:
@@ -230,6 +258,18 @@ class login(QDialog):
 
         self.msg1.setText(msg)
         return username
+
+def myMsgBox(text, title='Message', icon= QMessageBox.Information, buttons= QMessageBox.Ok ):
+    msg = QMessageBox()
+    msg.setText(text)
+    msg.setWindowTitle(title)
+    msg.setStandardButtons(buttons)
+    msg.setIcon(icon)
+
+    return msg.exec_()
+
+
+
 
 
 app = QApplication(sys.argv)

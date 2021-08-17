@@ -490,7 +490,7 @@ QScrollBar::sub-page:vertical
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -855,6 +855,30 @@ font-weight:bold;</string>
            <string notr="true">Border-radius:15px;</string>
           </property>
          </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QPushButton" name="btnforget">
+          <property name="styleSheet">
+           <string notr="true">background : transparent;
+color : #5C55E9</string>
+          </property>
+          <property name="text">
+           <string>Forgot password Click to Recover</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
