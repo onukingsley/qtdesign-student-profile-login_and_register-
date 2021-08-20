@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QPushButton, QStyleFactory, QMainWindow, QWidget, QMessageBox
+from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QPushButton, QStyleFactory, QMainWindow, QWidget, QMessageBox, QInputDialog
 from PyQt5.uic import loadUi
 import sqlite3
 from datetime import datetime
@@ -7,6 +7,7 @@ from PyQt5 import *
 from PyQt5.QtCore import QTimer
 from ui.function import *
 from requests import request, ConnectionError
+import secrets
 
 Db = sqlite3.connect('database.sql', check_same_thread=False)
 cursor = Db.cursor()
@@ -177,20 +178,92 @@ class login(QDialog):
         if value == QMessageBox.Ok:
             try:
                 request('GET', 'https://google.com')
-                username = self.txtusername.text()
-                if not username:
-                   print("username is needed")
-                else:
-                    sql = f"""select email from users where username = '{username}'"""
-                    result = cursor.execute(sql).fetchone()[0]
-                    if not result:
-                        msg = "user not found"
+                # username = self.txtusername.text()
+                username,dialog = QInputDialog().getText(self,'username: ','Enter username associated with the Account')
+                print(username)
+
+                try:
+                    if not username:
+                        print("username is needed")
                     else:
-                       myMsgBox('your recover message would be sent to your email')
+                        sql = f"""select email from users where username = '{username}'"""
+                        result = cursor.execute(sql).fetchone()[0]
+                        if not result:
+                            msg = "user not found"
+                            print(msg)
+                        else:
+                            newpassword = secrets.token_urlsafe(10)
+                            passwordencrypt = encrypt(newpassword)
+
+                            sql = f"""UPDATE users set password='{passwordencrypt}'"""
+                            cursor.execute(sql)
+                            Db.commit()
+
+                            sql = f"""select email from users where username = '{username}'"""
+                            result = Db.execute(sql).fetchone()[0]
+                            print(result)
+
+                            if emailSender('onu.nnamdi.2000@gmail.com', 'CleanDom', f"your password is {newpassword}") == 'ok':
+                                myMsgBox('your recover message would be sent to your email')
+
+
+
+
+
+
+                except Exception as er:
+                    print('user not found'+ er)
+
+
             except Exception as err:
                 print(err)
                 myMsgBox('Get an internet connection')
 
+    # def forgottenpassword(self):
+    #     try:
+    #         # msgBox = QMessageBox()
+    #         # msgBox.setText('Are you sure you want to change your Password?')
+    #         # msgBox.setWindowTitle('Confirm Password Change')
+    #         # msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    #         # msgBox.setIcon(QMessageBox.Information)  # Information , Question and warning
+    #
+    #         value = myMsgBox('Are you sure you want to change your Password?', 'confirm password change',
+    #                          buttons=QMessageBox.Ok | QMessageBox.Cancel)
+    #         if value == QMessageBox.Ok:
+    #             try:
+    #                 request('get', 'https://google.com')
+    #                 # username = self.txtLoginUser.text()
+    #                 username, Dialog = QInputDialog.getText(self, 'Username: ',
+    #                                                         'Enter Username associated with the Account!')
+    #
+    #                 if not Dialog:
+    #                     msg = "Username is needed!"
+    #                 else:
+    #                     sql = f"""SELECT email from users WHERE username = '{username}'"""
+    #                     result = cursor.execute(sql).fetchone()[0]
+    #                     if not result:
+    #                         msg = "Username not found"
+    #                     else:
+    #                         new_password = secrets.token_urlsafe(10)
+    #                         enc = encrypt(new_password)
+    #                         sql = f""" UPDATE users SET password = '{enc}' WHERE username = '{username}'"""
+    #                         cursor.execute(sql)
+    #                         Db.commit()
+    #
+    #                         if emailSender(result, "Password Recovery",
+    #                                        f"Your new password is: {new_password}") == 'ok':
+    #
+    #                             # I.E SEND THE GENERATED OWN TO THE MAIL, AND SEND THE ENCRYPTED ONE TO DATABASE
+    #                             msg = f"Your new password has been sent to your email address"
+    #                         else:
+    #                             msg = "Something is wrong"
+    #                 myMsgBox(msg)
+    #             except ConnectionError as err:
+    #                 myMsgBox("No Internet Connection", title='Check Network', icon=QMessageBox.Warning)
+    #
+    #     except Exception as err:
+    #         print(err)/v h
+    #         myMsgBox('User not found!', icon=QMessageBox.Warning)
 
 
     def showpass(self):
@@ -200,7 +273,7 @@ class login(QDialog):
             self.txtpassword.setEchoMode(0)
 
     def register(self):
-        print('hello')
+
         try:
             fullname = self.txtfullname.text()
             username = self.txtusername.text()
@@ -221,13 +294,14 @@ class login(QDialog):
                 # password = ci.encrypt(password)
                 password = sa.encrypt(password)
                 sql = f""" INSERT INTO users (fullname, username, password, email, usertype, regDate) values ('{fullname}','{username}','{password}','{email}','{usertype}','{now}')"""
-                self.cursor.execute(sql)
-                self.Db.commit()
+                cursor.execute(sql)
+                Db.commit()
+                print('hello')
 
 
 
         except Exception as err:
-            msg = str(err)
+            print(err)
 
 
     def log(self):
